@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Date and Time Display</title>
+</head>
+<body>
+    <h1></h1>
+
+    <button id="showDateButton">Show Date</button>
+    <button id="showTimeButton">Show Time</button>
+
+    <div id="output"></div>
+
+    <script>
+        const showDateButton = document.getElementById("showDateButton");
+        const showTimeButton = document.getElementById("showTimeButton");
+        const outputDiv = document.getElementById("output");
+
+        // Function to display the current date in "dd/month/yyyy" format
+        function showDate() {
+            const currentDate = new Date();
+            const day = currentDate.getDate().toString().padStart(2, '0');
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            const year = currentDate.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
+            outputDiv.textContent = `Current Date: ${formattedDate}`;
+        }
+
+        // Function to display the current date and time in a specified format
+        function showTime() {
+            const currentDate = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            };
+            const formattedDateTime = currentDate.toLocaleDateString('en-US', options);
+            outputDiv.textContent = `Current Date and Time: ${formattedDateTime}`;
+        }
+
+        // Event listeners for the buttons
+        showDateButton.addEventListener("click", showDate);
+        showTimeButton.addEventListener("click", showTime);
+    </script>
+</body>
+</html>

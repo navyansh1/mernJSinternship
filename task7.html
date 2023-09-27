@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Animation</title>
+    <style>
+        #train {
+            width: 100px;
+            height: 50px;
+            background-color: green;
+            position: relative;
+            animation: moveTrain 4s linear infinite;
+        }
+
+        @keyframes moveTrain {
+            0% {
+                left: 0;
+            }
+            100% {
+                left: calc(100% - 100px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Train Animation</h1>
+    <div id="train"></div>
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+
+    <script>
+        const train = document.getElementById("train");
+        const startButton = document.getElementById("startButton");
+        const stopButton = document.getElementById("stopButton");
+        let animationInterval;
+
+        startButton.addEventListener("click", () => {
+            train.style.animationPlayState = "running";
+            clearInterval(animationInterval);
+            animationInterval = setInterval(() => {
+                const currentPosition = parseFloat(getComputedStyle(train).left);
+                if (currentPosition >= window.innerWidth - 100) {
+                    train.style.left = "0";
+                }
+            }, 100);
+        });
+
+        stopButton.addEventListener("click", () => {
+            train.style.animationPlayState = "paused";
+            clearInterval(animationInterval);
+        });
+    </script>
+</body>
+</html>
